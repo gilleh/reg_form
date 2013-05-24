@@ -10,7 +10,7 @@ include('private/config.php');
 
 <body>
 <?php 
-echo 't: '.filter_var('tadasdasd@fhgfgf.com',FILTER_VALIDATE_EMAIL);
+echo 't: '.filter_var('tadasdasd@fhgfgf.com',FILTER_SANITIZE_EMAIL);
 
 ?>
 	<h1>Register!</h1>

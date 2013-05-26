@@ -6,15 +6,16 @@ include('private/config.php');
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Registration</title>
-<link rel="stylesheet" type="text/css" href="css/reg.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo BASEPATH ?>/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo BASEPATH ?>/css/reg.css" />
 <script type="text/javascript" src="js/reg.js"></script>
 </head>
 
 <body>
 	<h1>Register!</h1>
-	<form method="post" action="user/reg.php" onsubmit="return checkPasswords();">
+	<form method="post" action="user/reg/reg.php" onsubmit="return checkPasswords();">
 		<input type="text" placeholder="Email" name="email" /> example@domain.com<br/>
-		<input type="password" placeholder="Password" name="password" id="pw1"/> At least 6 characters. Must contain letters and at least one number.<br/>
+		<input type="password" placeholder="Password" name="password" id="pw1"/> Must be at least 6 characters.<br/>
 		<input type="password" placeholder="Repeat password" id="pw2"/> <br/>
 		<input type="text" placeholder="First Name" name="first_name"/><br/>
 		<input type="text" placeholder="Last Name" name="last_name"/><br/>

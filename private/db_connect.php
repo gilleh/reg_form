@@ -1,22 +1,19 @@
 <?php
 include('config.php');
 
-class DB_connect extends PDO {
-    public function __construct() {
-        try {
-			parent::__construct(DB_DRIVER.':dbname='.DB_NAME.';host='.DB_HOST, DB_USERNAME, DB_PASSWORD);
-			$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);   				 
-		} catch(PDOException $e) {
-			echo 'ERROR: ' . $e->getMessage();
-		} 
+class Reg extends PDO {
+    public function __construct(){
+        
     }
+
+    //Submit registration details to database
 	public function DB_reg_submit($data){
 		try {
 			parent::__construct(DB_DRIVER.':dbname='.DB_NAME.';host='.DB_HOST, DB_USERNAME, DB_PASSWORD);
 			$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);   	
 			 
-			$sub = $this->prepare('INSERT INTO '.DB_TABLE.' (email, password, first_name, last_name, date_of_birth) VALUES (:email, :password, :first_name, :last_name, :date_of_birth)');
-			$sub->execute(array(
+			$query = $this->prepare('INSERT INTO '.DB_TABLE.' (email, password, first_name, last_name, date_of_birth) VALUES (:email, :password, :first_name, :last_name, :date_of_birth)');
+			$query->execute(array(
 			':email' => $data['email'],
 			':password' => $data['password'],
 			':first_name' => $data['first_name'],
@@ -24,15 +21,52 @@ class DB_connect extends PDO {
 			':date_of_birth' => $data['date_of_birth']
 			));
 		 
-			echo $sub->rowCount();
-		} catch(PDOException $e) {
-			echo 'ERROR: ' . $e->getMessage();
+			echo $query->rowCount();
+		} catch(PDOException $e){
+			echo 'ERROR: '.$e->getMessage();
+		}
+	}
+
+	//Check if email is taken
+	public function checkEmail($email){
+		try {
+			parent::__construct(DB_DRIVER.':dbname='.DB_NAME.';host='.DB_HOST, DB_USERNAME, DB_PASSWORD);
+			$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+
+			$query = $this->prepare('SELECT email from '.DB_TABLE.' where email = :email');
+			$query->execute(array(
+			':email' => $email				
+			));
+
+			if($query->rowCount() === 1){
+				return true;
+			} else {
+				return false;
+			}
+		} catch(PDOException $e){
+			echo 'ERROR: '.$e->getMessage();
+		}
+	}
+
+	public function SVFilterVar($var, $sFilter = FALSE, $vFilter = FALSE){
+		if ($var != ""){
+			if ($sFilter){
+				$santized_var = filter_var($var, $sFilter);
+			
+				if ($vFilter){
+					if (filter_var($santized_var, $vFilter)) {
+						return $santized_var;
+					} else {
+						return FALSE;
+					}
+				} 
+				return $santized_var;
+			} else {
+				return $var;
+			}
+		} else {
+			return FALSE;
 		}
 	}
 }
-
-//$db = new foo_mysqli('localhost', 'my_user', 'my_password', 'my_db');
-//
-//echo 'Success... ' . $db->host_info . "\n";
-
 ?>

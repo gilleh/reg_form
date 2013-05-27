@@ -1,5 +1,5 @@
 <?php
-define('BASEPATH', 'http://localhost/reg_form');
+define('BASEPATH', 'http://localhost/reg_form/');
 define('DB_HOST', 'localhost');
 define('DB_TABLE', 'users');
 define('DB_USERNAME', 'root');

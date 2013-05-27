@@ -1,11 +1,67 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
-	background: #b2e1ff;
+	background: #f1f7ff;
+	color:#333;
 }
 
-#userbar {
-	background: #00a7d1;
-	height:12px;
-	padding: 12px;
+a {
+	text-decoration: none;
+	color:#333;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#container {
+	width:980px;
+	margin-right: auto;
+	margin-left: auto;
+	padding:10px;
+	min-height: 500px;
+	border-left: solid 1px #e1e1e1;
+	border-right: solid 1px #e1e1e1;
+}
+
+#container #regcontainer {
+	width:490px;	
+	float:left;
+}
+
+#container #logincontainer {
+	width:490px;		
+	float:right;
+}
+
+#container .mainheader {
+	font-size:18px;	
+	margin-bottom: 6px;
+}
+
+#container #userbar {
+	width: 972px;
+	height:18px;
+	padding:4px;
+	display: inline-table;
+	font-size:18px;
+	border-bottom: solid 1px #e1e1e1;
+}
+
+#container #userbar #logout {
+	width: 100px;
+	display: inline-table;
+	margin-left: auto;	
+	float: right;
+	font-size:16px;
+	text-align: right;
+}
+
+#container #userinfo {
+	width: 500px;
+	padding: 15px;
+}
+
+#container #userinfo .userrow {
+	margin-bottom: 5px;
 }
